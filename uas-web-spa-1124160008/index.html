@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en" class="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" href="/assets/logouniv.png" type="image/png">
+  <title>Open Payment Portal</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          colors: {
+            primary: '#1e3a8a',
+            secondary: '#f97316',
+          }
+        }
+      }
+    }
+  </script>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body class="bg-white dark:bg-gray-900 text-gray-800 dark:text-white transition-colors duration-300">
+  <!-- Header -->
+  <header class="flex items-center justify-between px-6 py-4 bg-primary text-white dark:bg-secondary">
+    <div class="flex items-center gap-4">
+      <img src="assets/myFoto.jpg" alt="Logo" class="w-[80px] rounded-full" />
+      <div>
+        <h1 class="text-xl font-bold">Open Payment Portal</h1>
+        <p class="text-sm">Global Instituted<br>NIM: 1124160008
+, Nama: Kenzie Gabriel Febrianto</p>
+      </div>
+    </div>
+    <button id="themeToggle" 
+    class="bg-white text-primary dark:bg-gray-900 dark:text-white p-2 rounded border border-white dark:border-white"
+    aria-label="Toggle Tema" onclick="toggleTheme()">
+  <!-- Icon default: Mata Terbuka -->
+  <svg id="iconLight" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from Material Symbols Light by Google - https://github.com/google/material-design-icons/blob/master/LICENSE --><path fill="currentColor" d="M12 16q-1.671 0-2.835-1.164Q8 13.67 8 12t1.165-2.835T12 8t2.836 1.165T16 12t-1.164 2.836T12 16m-7-3.5H1.5v-1H5zm17.5 0H19v-1h3.5zM11.5 5V1.5h1V5zm0 17.5V19h1v3.5zM6.746 7.404l-2.16-2.098l.695-.745l2.111 2.135zM18.72 19.439l-2.117-2.141l.652-.702l2.16 2.098zM16.596 6.745l2.098-2.16l.745.695l-2.135 2.111zM4.562 18.72l2.14-2.117l.664.652l-2.08 2.179z"/></svg>
+  
+  <!-- Icon alternatif: Mata Tertutup -->
+  <svg id="iconDark" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24"><!-- Icon from IconaMoon by Dariush Habibpour - https://creativecommons.org/licenses/by/4.0/ --><path fill="currentColor" d="m20.996 11.712l.999-.032a1 1 0 0 0-1.284-.927zm-8.707-8.707l.958.284a1 1 0 0 0-.927-1.284zm8.422 7.748A6 6 0 0 1 19 11v2a8 8 0 0 0 2.28-.33zM19 11a6 6 0 0 1-6-6h-2a8 8 0 0 0 8 8zm-6-6c0-.596.087-1.17.247-1.71l-1.917-.57A8 8 0 0 0 11 5zm-1-1q.13 0 .257.004l.063-1.999A10 10 0 0 0 12 2zm-8 8a8 8 0 0 1 8-8V2C6.477 2 2 6.477 2 12zm8 8a8 8 0 0 1-8-8H2c0 5.523 4.477 10 10 10zm8-8a8 8 0 0 1-8 8v2c5.523 0 10-4.477 10-10zm-.004-.257Q20 11.87 20 12h2q0-.16-.005-.32z"/></svg>
+</button>
+
+</header>
+
+  <!-- Navigation -->
+  <nav class="flex justify-center gap-4 my-4">
+    <button onclick="showPage('form')" class="bg-primary text-white px-4 py-2 rounded">Form Pembayaran</button>
+    <button onclick="showPage('riwayat')" class="bg-secondary text-white px-4 py-2 rounded">Riwayat Transaksi</button>
+  </nav>
+
+  <!-- Main Content -->
+  <main class="p-6">
+    <!-- Form Pembayaran -->
+   <section id="form-page" class="page-section max-w-md mx-auto p-6 bg-white dark:bg-gray-800 rounded shadow-md">
+  <h2 class="text-lg font-semibold mb-6 text-gray-800 dark:text-gray-100">Form Pembayaran</h2>
+  <form id="paymentForm" class="flex flex-col gap-5">
+    <input 
+      type="text" placeholder="Masukkan nama pelanggan" id="nama" required
+      class="input px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary transition" 
+    />
+    <input 
+      type="email" placeholder="contoh@email.com" id="email" required
+      class="input px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary transition"
+    />
+    <select id="product" 
+      class="input px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary transition"
+    >
+      <option>Pilih produk...</option>
+      <option value="100000">Layanan A - Rp 100.000</option>
+      <option value="200000">Layanan B - Rp 200.000</option>
+    </select>
+    <input 
+      type="number" value="1" min="1" id="quantity" 
+      class="input px-4 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary transition"
+    />
+
+    <fieldset class="border border-gray-300 dark:border-gray-600 rounded p-4">
+      <legend class="font-medium mb-2 text-gray-800 dark:text-gray-100">Metode Pembayaran</legend>
+      <div class="flex flex-col gap-2 text-gray-900 dark:text-gray-200">
+        <label class="flex items-center gap-2">
+          <input type="radio" name="payment" value="Bank" checked class="accent-primary dark:accent-secondary" />
+          Transfer Bank
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="payment" value="E-Wallet" class="accent-primary dark:accent-secondary" />
+          E-Wallet
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="payment" value="Kartu Kredit" class="accent-primary dark:accent-secondary" />
+          Kartu Kredit
+        </label>
+        <label class="flex items-center gap-2">
+          <input type="radio" name="payment" value="Tunai" class="accent-primary dark:accent-secondary" />
+          Bayar Tunai
+        </label>
+      </div>
+    </fieldset>
+
+    <div class="flex items-center gap-1">
+      <input 
+        type="text" id="promo" placeholder="Masukkan kode promo" 
+        class="input flex-1 px-2 py-2 rounded border border-gray-300 dark:border-gray-600 bg-gray-50 dark:bg-gray-700 text-gray-900 dark:text-gray-100 focus:outline-none focus:ring-2 focus:ring-primary dark:focus:ring-secondary transition"
+      />
+      <button 
+        type="button" onclick="applyPromo()" 
+        class="bg-secondary hover:bg-secondary-dark text-white px-2 py-2 rounded transition"
+      >
+        Terapkan
+      </button>
+    </div>
+
+    <div class="text-gray-800 dark:text-gray-200 mb-1 justify-between flex">
+      <span>Subtotal:</span>
+      <span id="subtotal" class="font-medium"></span>
+    </div>
+    <div class="text-gray-800 dark:text-gray-200 mb-1 justify-between flex">
+      <span>Total:</span>
+      <span id="total" class="font-medium"></span>
+    </div>
+ <button 
+      type="submit" 
+      class="bg-primary hover:bg-primary-dark text-white px-6 py-3 rounded transition"
+    >
+      Proses Pembayaran
+    </button>
+  </form>
+</section>
+
+    <!-- Riwayat Transaksi -->
+    <section id="riwayat-page" class="page-section hidden w-[90%] m-auto">
+    <h2 class="text-lg font-semibold mb-4">Riwayat Transaksi</h2>
+
+    <div class="grid grid-cols-3 gap-2 mb-6">
+        <div class="text-center border border-gray-300 dark:border-gray-300/70 rounded p-2">
+            <p id="transaksi-count" class="text-l font-bold text-primary dark:text-secondary">0</p>
+            <p>Transaksi</p>
+        </div>
+        <div class="text-center border border-gray-300 dark:border-gray-300/70 rounded p-2">
+            <p id="total-income" class="text-l font-bold text-green-500">Rp 0</p>
+            <p>Pendapatan</p>
+        </div>
+        <div class="text-center border border-gray-300 dark:border-gray-300/70 rounded p-2">
+            <p id="avg-income" class="text-l font-bold text-purple-500">Rp 0</p>
+            <p>Rata-rata</p>
+        </div>
+        </div>
+
+
+    <div class="mt-4 max-h-72 overflow-y-auto border border-gray-300 dark:border-gray-600 rounded">
+        <table class="w-full table-auto" id="transaksi-table">
+        <thead>
+            <tr class="bg-gray-100 dark:bg-gray-700 sticky top-0">
+            <th class="p-2 text-left">Nama</th>
+            <th class="p-2 text-left">Email</th>
+            <th class="p-2 text-left">Produk</th>
+            <th class="p-2 text-left">Jumlah</th>
+            <th class="p-2 text-left">Total</th>
+            <th class="p-2 text-left">Metode</th>
+            </tr>
+        </thead>
+        <tbody id="transaksi-body">
+            <tr id="no-transaction">
+            <td colspan="6" class="text-center text-gray-500 py-6">
+                Belum ada transaksi<br />Lakukan pembayaran pertama Anda!
+            </td>
+            </tr>
+        </tbody>
+        </table>
+    </div>
+    </section>
+
+  </main>
+  <div id="toast" class="fixed bottom-4 right-4 bg-green-600 text-white px-4 py-2 rounded shadow-lg hidden transition-opacity duration-300 z-50">
+    Transaksi berhasil ditambahkan!
+  </div>
+  <script src="script.js"></script>
+</body>
+</html>
